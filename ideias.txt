@@ -1,0 +1,12 @@
+Aqui vão algumas ideias
+-> começando um NOVO notebook.
+
+1. Analisar a media movel e exponencial da 'Appliances', 
+com shift de 1 tb, com a propria appliance (--done--)
+2. Analisar a distribuicao de algumas variaveis chave -> fazer boxplots e violinplots (--done--)
+3. Analisar valores negativos detectados no dataset (--done--)
+4. Analisar mapa de correlação com variaveis chave.
+5. Analisar outliers (--done--)
+6. Machine Learning, conforme especificado na Tarefa!
+
+
