@@ -1,4 +1,4 @@
-# Project with Feedback Number 8: Data Science Academy Data Scientist Bootcamp
+# Project with Feedback: Data Science Academy Data Scientist Bootcamp
 ## Predictive Modeling in IoT - Energy Usage Forecasting
 
 This IoT project aims to create predictive models for forecasting the energy consumption of appliances. The data used includes measurements from temperature and humidity sensors in a wireless network, weather forecasts from an airport station, and energy usage by light fixtures.
@@ -57,54 +57,57 @@ The following figure shows the number of unique values for each feature availabl
 ### Negative values
 
 By inspecting the dataset, there have been found three features which displayed negative values in the dataset, as shown in the figure below. These negative values could be potential issues when measuring those values.
+Interestingly, removing this [potential] inconsistent values did not change substantially the modeling results.
 
 ![logo](images/2_hist_negativecols.png)
 
 ### Histogram of all features
 
-The next figure shows histograms of the features available in the dataset, which interestingly points out that *Appliances* and *lights* present discrete values accross the dataset. As well, the other features's distributions can also be visually inspected. 
+The next figure shows histograms of the features available in the dataset, which interestingly points out that *Appliances* and *lights* present discrete values accross the dataset. As well, the other features's distributions can also be visually inspected. Moreover, one can see "spikes" in *RH_6, Windspeed, and Visibility* features.
 
 ![logo](images/3_hist_allfeatures.png)
 
-### Histogram for the first instance of *lights*
+### Histogram in terms of each unique value of *ligths*
+
+#### Histogram for the first instance of *lights*
 
 ![logo](images/4_1_histlight1.png)
 
-### Histogram for the second instance of *lights*
+#### Histogram for the second instance of *lights*
 
 ![logo](images/4_2_histlight2.png)
 
-### Histogram for the third instance of *lights*
+#### Histogram for the third instance of *lights*
 
 ![logo](images/4_3_histlight3.png)
 
-### Histogram for the fourth instance of *lights*
+#### Histogram for the fourth instance of *lights*
 
 ![logo](images/4_4_histlight4.png)
 
-### Histogram for the fifth instance of *lights*
+#### Histogram for the fifth instance of *lights*
 
 ![logo](images/4_5_histlight5.png)
 
-### Histogram for the sixth instance of *lights*
+#### Histogram for the sixth instance of *lights*
 
 ![logo](images/4_6_histlight6.png)
 
 ### Violinplot of all features
 
-Next, it is shown a figure displaying violin plots for all the features in the dataset.
+Next, it is shown a figure displaying violin plots for all the features in the dataset. From these graphics, it is noticeable that the features are well-behaved.
 
 ![logo](images/5_violinplot_features.png)
 
 ### Boxplot of all features
 
-Next, it is shown a figure displaying box plots for all the features in the dataset.
+Next, it is shown a figure displaying box plots for all the features in the dataset. From these graphics, it is noticeable that the features show a consistent behavior, possessing few outliers.
 
 ![logo](images/6_boxplot_features.png)
 
 ### Feature Engineering
 
-In the following subsections, there will be shown some lagged-related features that can be created from the target variable, in order to better forecast this time-series.
+In the following subsections, there will be shown some lagged-related features that can be created from the target variable, in order to better forecast this time-series. This kind of feature can and must be used in time-series related problems, since it carries information from past evaluations. 
 
 ### Appliances shifted by one week
 
@@ -197,17 +200,77 @@ The choice of scoring metric (e.g., accuracy, precision, recall, AUC) can influe
 
 ## Summary of the Key Findings
 
+1. Data Characteristics:
+- The "Appliances" energy consumption target variable exhibits discrete values.
+"date", "rv1", and "rv2" contain unique values, with "rv1" and "rv2" being random and irrelevant for prediction.
+- Negative values were observed in some features, but their removal did not significantly impact modeling results.
+- "Appliances" and "lights" show discrete distributions.
+"RH_6, Windspeed, and Visibility" features displayed "spikes" in their distributions.
+2. Feature Analysis:
+- Violin and box plots indicate generally well-behaved features with few outliers.
+- Lagged features (shifted "Appliances", rolling mean, exponential moving average) were created to enhance time-series forecasting.
+- Correlation analysis (Spearman method) revealed strong correlations between "Appliances" and features like "T3_std", "T3_iqr", "RH_3_std", and "RH_1_std".
+3. Machine Learning:
+- A pipeline was developed involving feature engineering, scaling, and quadratic feature addition.
+A Support Vector Regressor (SVR) model showed good agreement between predicted and actual "Appliances" values, with an R-squared of 0.6 on the test set.
+- Permutation Feature Importance was used to assess feature contributions, highlighting the importance of certain temperature and humidity related features.
+4. Key takeaway:
+- The energy consumption of appliances can be predicted with good accuracy using a SVR model, leveraging temperature, humidity, and time-related features, along with engineered lagged features.
+- Specific temperature and humidity variation metrics are strong predictors of appliance energy consumption.
 
+## Real-world Scenario Usages
 
-## Real-world Scenario Usage
+1. **Smart Home Energy Management Systems**:
 
+- **Scenario**: A company developing a smart home energy management system can use this analysis to build predictive models that forecast appliance energy consumption.
+- **Usage**:
+The system can learn user behavior patterns and predict when energy usage will peak.
+It can then automatically adjust appliance settings (e.g., dimming lights, adjusting thermostat) to minimize energy consumption and reduce costs.
+It can provide real-time feedback to homeowners about their energy usage and suggest ways to conserve energy.
+The system could be integrated with smart grids to optimize energy distribution and demand.
+- **Benefit**: Reduced energy bills, increased energy efficiency, and a more comfortable living environment.
 
+2. **Building Automation Systems**:
+
+- **Scenario**: A commercial building manager wants to optimize energy usage in their building.
+- **Usage**:
+The analysis can be used to develop models that predict energy consumption for different zones within the building.
+The building automation system can then automatically adjust HVAC systems, lighting, and other appliances to minimize energy usage based on occupancy, weather conditions, and predicted demand.
+The system can identify areas of the building with high energy consumption and provide insights into potential energy-saving measures.
+- **Benefit**: Lower operating costs, improved building sustainability, and a more comfortable work environment.
+
+3. **Energy Auditing and Consulting**:
+
+- **Scenario**: An energy auditor wants to identify areas of energy waste in a residential or commercial building.
+- **Usage**:
+The analysis can be used to develop models that predict energy consumption based on building characteristics, occupant behavior, and weather conditions.
+The auditor can then compare the predicted energy consumption to the actual energy consumption to identify areas where energy is being wasted.
+The auditor can provide recommendations to building owners on how to improve energy efficiency.
+- **Benefit**: Reduced energy costs for building owners, improved building energy efficiency, and a more sustainable built environment.
+
+4. **Predictive Maintenance for Appliances**:
+
+- **Scenario**: A manufacturer of home appliances wants to develop a predictive maintenance system.
+- **Usage**:
+The analysis can be used to develop models that predict when appliances are likely to fail based on their energy consumption patterns.
+The system can then notify homeowners or service technicians when an appliance needs maintenance, preventing costly breakdowns.
+This is especially useful when considering the correlation between the appliances energy consumption, and the variation of temperature and humidity.
+- **Benefit**: Increased appliance lifespan, reduced maintenance costs, and improved customer satisfaction.
+
+5. **Smart Grid Management**:
+
+- **Scenario**: An energy utility company wants to optimize energy distribution and demand.
+- **Usage**:
+The analysis can be used to develop models that predict energy demand at different times of the day and in different locations.
+The utility company can then use these predictions to optimize energy distribution and avoid blackouts.
+Smart grid technologies can be implemented to automatically adjust energy supply and demand in response to changing conditions.
+- **Benefit** : Improved grid stability, reduced energy losses, and increased use of renewable energy sources.
 
 
 
 ## Acknowledgements
 
-
+Kaggle is acknowledged for having generated this artificial dataset and hosted a competition.
 
 
 ## MIT License
