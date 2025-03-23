@@ -104,6 +104,8 @@ Next, it is shown a figure displaying box plots for all the features in the data
 
 ### Feature Engineering
 
+In the following subsections, there will be shown some lagged-related features that can be created from the target variable, in order to better forecast this time-series.
+
 ### Appliances shifted by one week
 
 In the following figure, it is shown a visual comparison between the actual *Appliances* measure against its *7-day lagged version*.
@@ -126,6 +128,22 @@ In the following figure, it is shown a visual comparison between the actual *App
 ### Feature's correlation matrix
 
 Next, it is shown the correlation matrix of the features present in the dataset, by considering the *spearman correlation method*, since this data is not normally distributed. Regardless of "Appliances", and "Appliances_std", it can be noticed that the features "T3_std", "T3_iqr", "RH_3_std", "RH_1_std" are highly correlated with "Appliances", the target variable. Therefore, these previously mentioned features are expect to contribute heavily for the machine learning model output.
+
+#### Machine Learning Pipeline
+
+The "hand-made" pipeline performed in order to apply the same methodology in training and testing sets has been architected as follows:
+
+1. drop of irrelevant features;
+2. daily resampling of the hourly instances, followed by the calculation of the mean, median, standard deviation and Interquantile Range statistics within these days instances;
+3. further calculation of lagged-related featuers, such as lag 1 of Appliances, 7-day rolling mean shifted by 1 day of Appliances, and an exponential weighted-average of Appliances;
+4. removal of rows containing null values;
+5. creation of date attributes, such as day, month and week;
+6. split of data into feature and target (Appliances);
+7. Addition of quadratic features into the features' dataset in order to get more predictive features;
+8. scaler applied to the respective data (if training set, it fits and transforms, or if in the testing set only applies the trained scaler);
+9. training and prediction in the training set, or prediction in the testing set by using the model trained in the training set;
+10. calculation of useful performance metrics on training and testing sets, such as **mean squared error** and **R-squared score**, in order to quantufy the model's generalization.
+
 
 ![logo](images/10_corr_spearman.png)
 
