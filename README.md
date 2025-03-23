@@ -48,72 +48,131 @@ Important notes:
 
 ## Results
 
-###
+### Unique values for each Feature
+
+The following figure shows the number of unique values for each feature available in the dataset. It can be noticed that "date", "rv2", and "rv1" present all different values, and "Appliances", the *target variable*, does not show a wide range of unique values, suggesting it displays discrete values.
 
 ![logo](images/1_uniquevalues.png)
 
-###
+### Negative values
+
+By inspecting the dataset, there have been found three features which displayed negative values in the dataset, as shown in the figure below. These negative values could be potential issues when measuring those values.
 
 ![logo](images/2_hist_negativecols.png)
 
-###
+### Histogram of all features
 
+The next figure shows histograms of the features available in the dataset, which interestingly points out that *Appliances* and *lights* present discrete values accross the dataset. As well, the other features's distributions can also be visually inspected. 
 
 ![logo](images/3_hist_allfeatures.png)
 
-###
+### Histogram for the first instance of *lights*
 
 ![logo](images/4_1_histlight1.png)
 
-###
+### Histogram for the second instance of *lights*
 
 ![logo](images/4_2_histlight2.png)
 
-###
+### Histogram for the third instance of *lights*
 
 ![logo](images/4_3_histlight3.png)
 
-###
+### Histogram for the fourth instance of *lights*
 
 ![logo](images/4_4_histlight4.png)
 
-###
+### Histogram for the fifth instance of *lights*
 
 ![logo](images/4_5_histlight5.png)
 
-###
+### Histogram for the sixth instance of *lights*
 
 ![logo](images/4_6_histlight6.png)
 
-###
+### Violinplot of all features
+
+Next, it is shown a figure displaying violin plots for all the features in the dataset.
 
 ![logo](images/5_violinplot_features.png)
 
-###
+### Boxplot of all features
+
+Next, it is shown a figure displaying box plots for all the features in the dataset.
 
 ![logo](images/6_boxplot_features.png)
 
-###
+### Feature Engineering
+
+### Appliances shifted by one week
+
+In the following figure, it is shown a visual comparison between the actual *Appliances* measure against its *7-day lagged version*.
 
 ![logo](images/7_appliances_lag7.png)
 
-###
+### Shifted rolling mean of Appliances
+
+In the following figure, it is shown a visual comparison between the actual *Appliances* measure against its *one-day shifted 7 days rolling mean* version.
 
 ![logo](images/8_appliances_lag1_rollmean7.png)
 
-###
+### Exponential-weighted Moving Average of Appliances 
+
+In the following figure, it is shown a visual comparison between the actual *Appliances* measure against its *one-day shifted exponential moving-average* version.
+
 
 ![logo](images/9_appliances_ewm1.png)
 
-###
+### Feature's correlation matrix
+
+Next, it is shown the correlation matrix of the features present in the dataset, by considering the *spearman correlation method*, since this data is not normally distributed. Regardless of "Appliances", and "Appliances_std", it can be noticed that the features "T3_std", "T3_iqr", "RH_3_std", "RH_1_std" are highly correlated with "Appliances", the target variable. Therefore, these previously mentioned features are expect to contribute heavily for the machine learning model output.
 
 ![logo](images/10_corr_spearman.png)
 
-###
+### Machine Learning Modeling
+
+The next figure shows the graphical result of the **SVR** (Support Vector Regressor) model in the testing data, evidencing a good agreement between prediction and the testing target variable, which is corroborated by the R-squared value in the testing set equals to 0.6. 
 
 ![logo](images/11_svrmodel_test_pred.png)
 
-###
+### Feature's Importance
+
+The following figure shows the feature's relative importance/contribution in the model's output by considering the **Permutation Feature Importance**, since the usual implementation of the feature's importance method in sk-learn can not be used in Support Vector related methods. 
+
+#### Core Idea of Permutation Feature's Importance
+
+- The method measures how much a model's performance decreases when a specific feature's values are randomly shuffled (permuted).
+**If shuffling a feature significantly reduces the model's accuracy (or another relevant metric), that feature is considered important.**
+Conversely, if shuffling a feature has little to no impact on performance, that feature is deemed less important.
+- Steps Involved:
+
+1. Train the Model:
+First, you train your SVM (or any other model) on your training data.
+2. Establish Baseline Performance:
+Evaluate the model's performance on a validation or test set, recording the baseline score (e.g., accuracy, AUC).
+3. Permute Features:
+For each feature, one at a time:
+Randomly shuffle the values of that feature in the validation/test set.
+Make predictions using the modified dataset.
+Calculate the model's performance score with the shuffled feature.
+Compare the new score to the baseline score.
+4. Calculate Importance:
+- The difference between the baseline score and the score with the shuffled feature represents the feature's importance.
+- Larger differences indicate higher importance.
+5. Repeat and Average:
+To reduce randomness, the permutation process is often repeated multiple times, and the results are averaged.
+
+- **Key Considerations for SVM**:
+
+- Non-linear SVMs:
+Permutation importance is particularly useful for non-linear SVMs (e.g., those using RBF kernels), where feature importance cannot be directly derived from model coefficients.
+- Model-Agnostic:
+A significant advantage of permutation importance is that it's model-agnostic, meaning it can be applied to any trained machine learning model.
+- Correlation:
+If features are highly correlated, permutation importance can produce misleading results. Shuffling one feature might not significantly impact performance if another correlated feature provides similar information.
+Scoring Metric:
+The choice of scoring metric (e.g., accuracy, precision, recall, AUC) can influence the results.
+
 
 ![logo](images/12_permutationimportance_svr.png)
 
