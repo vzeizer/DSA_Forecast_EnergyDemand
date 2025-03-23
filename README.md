@@ -45,3 +45,112 @@ Important notes:
 - Variables rv1 and rv2 should be discarded in the analysis as they are non-predictive by definition
 - Weather data comes from an external source (rp5.ru) and was merged using the date/time
 
+
+## Results
+
+###
+
+![logo](images/1_uniquevalues.png)
+
+###
+
+![logo](images/2_hist_negativecols.png)
+
+###
+
+
+![logo](images/3_hist_allfeatures.png)
+
+###
+
+![logo](images/4_1_histlight1.png)
+
+###
+
+![logo](images/4_2_histlight2.png)
+
+###
+
+![logo](images/4_3_histlight3.png)
+
+###
+
+![logo](images/4_4_histlight4.png)
+
+###
+
+![logo](images/4_5_histlight5.png)
+
+###
+
+![logo](images/4_6_histlight6.png)
+
+###
+
+![logo](images/5_violinplot_features.png)
+
+###
+
+![logo](images/6_boxplot_features.png)
+
+###
+
+![logo](images/7_appliances_lag7.png)
+
+###
+
+![logo](images/8_appliances_lag1_rollmean7.png)
+
+###
+
+![logo](images/9_appliances_ewm1.png)
+
+###
+
+![logo](images/10_corr_spearman.png)
+
+###
+
+![logo](images/11_svrmodel_test_pred.png)
+
+###
+
+![logo](images/12_permutationimportance_svr.png)
+
+
+## Summary of the Key Findings
+
+
+
+## Real-world Scenario Usage
+
+
+
+
+
+## Acknowledgements
+
+
+
+
+## MIT License
+
+Copyright (c) [2025] [Dr. Vagner Zeizer Carvalho Paes]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
